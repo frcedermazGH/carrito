@@ -1,0 +1,17 @@
+<?php
+use App\Repository\ProductoRepository;
+
+class ProductoManager
+{
+    private $productoRepository;
+
+    public function __construct(ProductoRepository $prodRep)
+    {
+        $this->productoRepository = $prodRep;
+    }
+
+    function getProductos()
+    {
+        return $this->productoRepository->findAll();
+    }
+}
