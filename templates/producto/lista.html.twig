@@ -1,15 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <div class="header">
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <h3 id="title">Carrito de Compras - {{ app.user.nombre }}</h3>
-        {% endif %}
-        <div>
-            <button class="btn-ligth">Ver orden</button>
-            <button class="btn-ligth">Salir</button>
-        </div>
-    </div>
+    {% include "header.html.twig" %}
     <h3 class="list-title">Lista de productos</h3>
     <div class="product-grid">
         {% for producto in productos %}

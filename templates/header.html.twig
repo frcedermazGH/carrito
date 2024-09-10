@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <div class="header">
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <h3 id="title">Carrito de Compras - {{ app.user.nombre }}</h3>
+        {% endif %}
+        <div>
+            <button class="btn-ligth">Ver orden</button>
+            <a href="{{ path('app_logout') }}" class="btn-ligth">Salir</a>
+        </div>
+    </div>
+{% endblock %}
