@@ -11,7 +11,15 @@
                     <p id="product-subtitle">{{ producto.descripcion }}</p>
                     <div class="price-container">
                         <h3>${{ producto.precio }}</h3>
-                         <a href="{{ path('listar_productos') }}" class="details-button">Volver</a>
+                    </div>
+                    <div>
+                        <form method="post" action="{{ path('agregar_producto') }}">
+                            Cantidad<br>
+                            <input type="text" name="cantidad"><br>
+                            <input name="idProducto" hidden value="{{ producto.id }}"><br>
+                            <input type="submit" value="Agregar a la orden">
+                        </form>
+                        <a href="{{ path('listar_productos') }}" class="details-button">Volver</a>
                     </div>
                 </div>
             </div>

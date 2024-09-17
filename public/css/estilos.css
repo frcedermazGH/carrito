@@ -128,3 +128,7 @@ body{
   margin-top: 15px;
   color: red;
 }
+
+.flash-notice{
+  background-color: rgba(163, 255, 224, 0.699);
+}
