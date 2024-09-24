@@ -99,6 +99,15 @@ class Orden
         return $this;
     }
 
+    public function agregarItem(Producto $producto, int $cantidad)
+    {
+        $item = new Item();
+        $item->setProducto($producto);
+        $item->setCantidad($cantidad);
+        $this->addItem($item);
+        return $item;
+    }
+
     public function removeItem(Item $item): static
     {
         if ($this->item->removeElement($item)) {
