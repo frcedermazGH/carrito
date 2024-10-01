@@ -4,6 +4,7 @@ namespace App\Manager;
 
 use App\Entity\Usuario;
 use App\Entity\Orden;
+use App\Repository\OrdenRepository;
 use DateTime;
 use App\Repository\ProductoRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -11,27 +12,36 @@ use Doctrine\ORM\EntityManagerInterface;
 class OrdenManager
 {
     private $productoRepository;
+    private $ordenRepository;
     private $entityManager;
 
-    public function __construct(EntityManagerInterface $entityManager, ProductoRepository $prodRep)
+    public function __construct(EntityManagerInterface $entityManager, ProductoRepository $prodRep, OrdenRepository $ordenRep)
     {
         $this->productoRepository = $prodRep;
+        $this->ordenRepository = $ordenRep;
         $this->entityManager = $entityManager;
     }
 
     function agregarProducto(Usuario $usuario, int $idProducto, int $cantidad)
     {
-        $orden = new Orden();
-        $orden->setEstado('Iniciada');
-        $now = new DateTime();
-        $orden->setIniciada($now);
-        $orden->setUsuario($usuario);
+        $orden = $this->obtenerOrden($usuario, 'Iniciada');
         $producto = $this->productoRepository->find($idProducto);
-
+        if ($orden == null) {
+            $orden = new Orden();
+            $orden->setEstado('Iniciada');
+            $now = new DateTime();
+            $orden->setIniciada($now);
+            $orden->setUsuario($usuario);
+        }
         $item = $orden->agregarItem($producto, $cantidad);
-
-        $this->entityManager->persist($orden);
         $this->entityManager->persist($item);
+        $this->entityManager->persist($orden);
         $this->entityManager->flush();
+    }
+
+    private function obtenerOrden(Usuario $usuario, string $estado)
+    {
+        $ordenEncontrada = $this->ordenRepository->findOneBy(['usuario' => $usuario, 'estado' => $estado]);
+        return $ordenEncontrada;
     }
 }

@@ -89,14 +89,22 @@ class Orden
         return $this->item;
     }
 
-    public function addItem(Item $item): static
+    public function addItem(Item $item)
     {
+        foreach ($this->item as $element) {
+            if ($element->equals(($item))) {
+                $element->setCantidad($item->getCantidad());
+                return $element;
+            }
+        }
+
+
         if (!$this->item->contains($item)) {
             $this->item->add($item);
             $item->setOrden($this);
         }
 
-        return $this;
+        return $item;
     }
 
     public function agregarItem(Producto $producto, int $cantidad)
@@ -104,7 +112,7 @@ class Orden
         $item = new Item();
         $item->setProducto($producto);
         $item->setCantidad($cantidad);
-        $this->addItem($item);
+        $item = $this->addItem($item);
         return $item;
     }
 

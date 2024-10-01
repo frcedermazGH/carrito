@@ -64,4 +64,15 @@ class Item
 
         return $this;
     }
+
+    public function equals(Item $item)
+    {
+        $productoUno = $item->getProducto();
+        $productoDos = $this->getProducto();
+        if ($productoUno->getId() == $productoDos->getId()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
