@@ -1,4 +1,4 @@
-body{
+body {
   background-color: #1d3557;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
 }
@@ -27,7 +27,7 @@ body{
   font-weight: 700;
 }
 
-.list-title{
+.list-title {
   color: #eae2b7;
 }
 
@@ -36,14 +36,16 @@ body{
   color: white;
   border-radius: 10px;
   border: none;
-  margin-top: 15px;
   margin-bottom: 15px;
+  font-size: medium;
+  padding: 3px;
+  text-decoration: none;
 }
 
-.description-container{
-  border: 1px solid #ccc;
+.description-container {
+  display: flex;
+  flex-direction: row;
   border-radius: 10px;
-  width: 150px;
   padding: 10px;
   margin-top: 10px;
 }
@@ -61,13 +63,13 @@ body{
   background-color: #ffffff;
 }
 
-#product-title{
-  margin-top: 0px;
+#product-title {
+  margin-top: 10px;
   margin-bottom: 0px;
   color: #003049;
 }
 
-#product-subtitle{
+#product-subtitle {
   margin-top: 3px;
   margin-bottom: 0px;
   color: #003049;
@@ -80,22 +82,14 @@ body{
   padding: 10px;
 }
 
-.price-container{
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-content: center;
-  gap: 40px;
-}
-
-.login-container{
+.login-container {
   background-color: white;
   margin-left: 450px;
   margin-right: 450px;
   margin-top: 100px;
 }
 
-.login-form{
+.login-form {
   display: flex;
   flex-direction: column;
   padding: 40px;
@@ -103,11 +97,11 @@ body{
   align-content: center;
 }
 
-.label{
+.label {
   margin-bottom: 7px;
 }
 
-.input{
+.input {
   margin-bottom: 10px;
   padding: 5px;
   border-radius: 10px;
@@ -115,7 +109,7 @@ body{
   background-color: rgb(230, 218, 218);
 }
 
-.submit-button{
+.submit-button {
   margin-top: 20px;
   padding: 8px;
   border: 1px solid beige;
@@ -124,11 +118,50 @@ body{
   color: white;
 }
 
-.error{
+.error {
   margin-top: 15px;
   color: red;
 }
 
-.flash-notice{
+.flash-notice {
   background-color: rgba(163, 255, 224, 0.699);
+}
+
+.order-container {
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  margin-left: 50px;
+  margin-right: 50px;
+  gap: 30px;
+  justify-content: space-between;
+}
+
+.order-items,
+.order-summary {
+  background-color: #ffffff;
+  padding: 20px;
+}
+
+.order-items{
+  width: 900px;
+}
+
+.item-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.order-title{
+  color: black
+}
+
+.order-description{
+  margin-left: 20px;
+}
+
+.right-container{
+  margin-left: 15px;
 }

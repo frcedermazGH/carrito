@@ -5,22 +5,23 @@
     <h3 class="list-title">Detalle de producto</h3>
     <div class="product-grid">
             <div class="product-container">
-                <img src="{{ asset(producto.imagen) }}" width="100" height="100" alt="{{ producto.nombre }}"/>
                 <div class="description-container">
-                    <h4 id="product-title">{{ producto.nombre }}</h4>
-                    <p id="product-subtitle">{{ producto.descripcion }}</p>
-                    <div class="price-container">
-                        <h3>${{ producto.precio }}</h3>
-                    </div>
                     <div>
+                        <img src="{{ asset(producto.imagen) }}" width="150" height="150" alt="{{ producto.nombre }}"/>
+                    </div>
+                    <div class="right-container">
+                      <h4 id="product-title">{{ producto.nombre }}</h4>
+                    <p id="product-subtitle">{{ producto.descripcion }}</p>
+                        <h3>${{ producto.precio }}</h3>
                         <form method="post" action="{{ path('agregar_producto') }}">
                             Cantidad<br>
-                            <input type="text" name="cantidad"><br>
+                            <input class="input" type="text" name="cantidad"><br>
                             <input name="idProducto" hidden value="{{ producto.id }}"><br>
-                            <input type="submit" value="Agregar a la orden">
+                            <input class="details-button" type="submit" value="Agregar a la orden">
                         </form>
                         <a href="{{ path('listar_productos') }}" class="details-button">Volver</a>
                     </div>
+                  
                 </div>
             </div>
     </div>
