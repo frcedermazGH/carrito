@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    {% include "header.html.twig" %}
+
+    {% for message in app.flashes('notice') %}
+        <div class="flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="order-container">
+        <div class="order-items">
+            <h3 class="list-title">Su Orden</h3>
+            <div class="item-grid">
+                {% for item in orden.getItem() %}
+                    <div class="product-container">
+                        <img src="{{ asset(item.getProducto().imagen) }}" width="100" height="100" alt="{{ item.getProducto().nombre }}"/>
+                        <div class="description-container">
+                            <h4 id="product-title">{{ item.getProducto().nombre }}</h4>
+                            <p id="product-subtitle">Cantidad: {{ item.getCantidad() }}</p>
+                            <div class="price-container">
+                                <p><strong>Precio:</strong> ${{ item.getProducto().precio }}</p>
+                                <p><strong>Total:</strong> ${{ (item.getProducto().precio * item.getCantidad())|number_format(2, ',', '.') }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% else %}
+                    <p>No tienes productos en tu orden.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="order-summary">
+            <h3 class="list-title">Resumen</h3>
+            <h3><strong>Total de la orden:</strong> ${{ orden.getTotal()|number_format(2, ',', '.') }}</h3>
+            <a href="#" class="btn-ligth">Confirmar compra</a>
+        </div>
+    </div>
+{% endblock %}

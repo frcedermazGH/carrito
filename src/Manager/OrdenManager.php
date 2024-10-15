@@ -44,4 +44,9 @@ class OrdenManager
         $ordenEncontrada = $this->ordenRepository->findOneBy(['usuario' => $usuario, 'estado' => $estado]);
         return $ordenEncontrada;
     }
+
+    function verOrden(Usuario $usuario){
+        $orden = $this->ordenRepository->findOneBy(['usuario' => $usuario, 'estado' => 'Iniciada']);
+        return $orden;
+    }
 }

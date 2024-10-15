@@ -65,6 +65,15 @@ class Item
         return $this;
     }
 
+    public function getTotal(): ?float
+    {
+        if ($this->producto !== null && $this->cantidad !== null) {
+            return $this->cantidad * $this->producto->getPrecio();
+        }
+    
+        return null;
+    }
+
     public function equals(Item $item)
     {
         $productoUno = $item->getProducto();

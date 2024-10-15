@@ -139,4 +139,14 @@ class Orden
 
         return $this;
     }
+
+    public function getTotal(){
+        $total = 0.0;
+
+        foreach ($this->item as $item) {
+            $total += $item->getTotal();
+        }
+
+        return $total;
+    }
 }

@@ -6,7 +6,7 @@
             <h3 id="title">Carrito de Compras - {{ app.user.nombre }}</h3>
         {% endif %}
         <div>
-            <button class="btn-ligth">Ver orden</button>
+            <a href="{{ path('ver_orden') }}" class="btn-ligth">Ver orden</a>
             <a href="{{ path('app_logout') }}" class="btn-ligth">Salir</a>
         </div>
     </div>
