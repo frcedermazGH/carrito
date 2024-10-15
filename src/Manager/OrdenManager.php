@@ -4,6 +4,7 @@ namespace App\Manager;
 
 use App\Entity\Usuario;
 use App\Entity\Orden;
+use App\Repository\ItemRepository;
 use App\Repository\OrdenRepository;
 use DateTime;
 use App\Repository\ProductoRepository;
@@ -14,11 +15,13 @@ class OrdenManager
     private $productoRepository;
     private $ordenRepository;
     private $entityManager;
+    private $itemRepository;
 
-    public function __construct(EntityManagerInterface $entityManager, ProductoRepository $prodRep, OrdenRepository $ordenRep)
+    public function __construct(EntityManagerInterface $entityManager, ProductoRepository $prodRep, OrdenRepository $ordenRep, ItemRepository $itemRep)
     {
         $this->productoRepository = $prodRep;
         $this->ordenRepository = $ordenRep;
+        $this->itemRepository = $itemRep;
         $this->entityManager = $entityManager;
     }
 
@@ -45,18 +48,27 @@ class OrdenManager
         return $ordenEncontrada;
     }
 
-    function verOrden(Usuario $usuario){
+    function verOrden(Usuario $usuario)
+    {
         $orden = $this->ordenRepository->findOneBy(['usuario' => $usuario, 'estado' => 'Iniciada']);
         return $orden;
     }
 
-    function finalizarCompra(Usuario $usuario){
+    function finalizarCompra(Usuario $usuario)
+    {
         $orden = $this->ordenRepository->findOneBy(['usuario' => $usuario, 'estado' => 'Iniciada']);
         $orden->setEstado("Finalizada");
         $now = new DateTime();
         $orden->setConfirmada($now);
         $this->entityManager->flush();
         return $orden;
+    }
 
+    function eliminarItem(Usuario $usuario, string $idItem){
+        $orden = $this->ordenRepository->findOneBy(['usuario' => $usuario, 'estado' => 'Iniciada']);
+        $item = $this->itemRepository->find($idItem);
+        $orden->removeItem($item);
+        $this->entityManager->remove($item);
+        $this->entityManager->flush();
     }
 }

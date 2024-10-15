@@ -45,4 +45,13 @@ class OrdenController extends AbstractController
         $this->addFlash('notice', 'Compra finalizada con éxito.');
         return $this->redirectToRoute('listar_productos');
     }
+
+    
+    #[Route('/orden/eliminar/{idItem}', name: 'eliminar_item')]
+    public function eliminarItem(OrdenManager $ordenManager, string $idItem): RedirectResponse
+    {
+        $usuario = $this->getUser();
+        $ordenManager->eliminarItem($usuario, $idItem);
+        return $this->redirectToRoute('ver_orden');
+    }
 }

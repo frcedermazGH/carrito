@@ -23,6 +23,7 @@
                                 <p><strong>Precio:</strong> ${{ item.getProducto().precio }}</p>
                                 <p><strong>Total:</strong> ${{ (item.getProducto().precio * item.getCantidad()) }}</p>
                             </div>
+                             <a href="{{ path('eliminar_item', {'idItem': item.id}) }}" class="btn-light">Eliminar item</a>
                         </div>
                     </div>
                 {% endfor %}
