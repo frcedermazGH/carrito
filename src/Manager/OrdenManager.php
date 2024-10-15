@@ -49,4 +49,14 @@ class OrdenManager
         $orden = $this->ordenRepository->findOneBy(['usuario' => $usuario, 'estado' => 'Iniciada']);
         return $orden;
     }
+
+    function finalizarCompra(Usuario $usuario){
+        $orden = $this->ordenRepository->findOneBy(['usuario' => $usuario, 'estado' => 'Iniciada']);
+        $orden->setEstado("Finalizada");
+        $now = new DateTime();
+        $orden->setConfirmada($now);
+        $this->entityManager->flush();
+        return $orden;
+
+    }
 }

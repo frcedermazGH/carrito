@@ -29,11 +29,20 @@ class OrdenController extends AbstractController
         $usuario = $this->getUser();
         $orden = $ordenManager->verOrden($usuario);
         if (!$orden) {
-            $this->addFlash('warning', 'No tenés una orden en curso.');
+            $this->addFlash('notice', 'No tenés una orden en curso.');
             return $this->redirectToRoute('listar_productos');
         }
         return $this->render('orden/resumen.html.twig', [
             'orden' => $orden,
         ]);
+    }
+
+    #[Route('/orden/finalizar', name: 'finalizar_compra')]
+    public function finalizarCompra(OrdenManager $ordenManager): RedirectResponse
+    {
+        $usuario = $this->getUser();
+        $ordenManager->finalizarCompra($usuario);
+        $this->addFlash('notice', 'Compra finalizada con éxito.');
+        return $this->redirectToRoute('listar_productos');
     }
 }

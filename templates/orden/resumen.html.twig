@@ -21,20 +21,18 @@
                             <p id="product-subtitle">Cantidad: {{ item.getCantidad() }}</p>
                             <div class="price-container">
                                 <p><strong>Precio:</strong> ${{ item.getProducto().precio }}</p>
-                                <p><strong>Total:</strong> ${{ (item.getProducto().precio * item.getCantidad())|number_format(2, ',', '.') }}</p>
+                                <p><strong>Total:</strong> ${{ (item.getProducto().precio * item.getCantidad()) }}</p>
                             </div>
                         </div>
                     </div>
-                {% else %}
-                    <p>No tienes productos en tu orden.</p>
                 {% endfor %}
             </div>
         </div>
 
         <div class="order-summary">
             <h3 class="list-title">Resumen</h3>
-            <h3><strong>Total de la orden:</strong> ${{ orden.getTotal()|number_format(2, ',', '.') }}</h3>
-            <a href="#" class="btn-ligth">Confirmar compra</a>
+            <h3><strong>Total de la orden:</strong> ${{ orden.getTotal() }}</h3>
+            <a href="{{ path('finalizar_compra') }}" class="btn-light">Confirmar compra</a>
         </div>
     </div>
 {% endblock %}
