@@ -71,4 +71,14 @@ class OrdenManager
         $this->entityManager->remove($item);
         $this->entityManager->flush();
     }
+
+    function vaciarOrden(Usuario $usuario){
+        $orden = $this->ordenRepository->findOneBy(['usuario' => $usuario, 'estado' => 'Iniciada']);
+        $item = $orden->getItem();
+        foreach ($item as $element) {
+            $orden->removeItem($element);
+            $this->entityManager->remove($element);
+        }
+        $this->entityManager->flush();
+    }
 }

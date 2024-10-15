@@ -54,4 +54,12 @@ class OrdenController extends AbstractController
         $ordenManager->eliminarItem($usuario, $idItem);
         return $this->redirectToRoute('ver_orden');
     }
+
+    #[Route('/orden/vaciar', name: 'vaciar_orden')]
+    public function vaciarOrden(OrdenManager $ordenManager): RedirectResponse
+    {
+        $usuario = $this->getUser();
+        $ordenManager->vaciarOrden($usuario);
+        return $this->redirectToRoute('ver_orden');
+    }
 }
